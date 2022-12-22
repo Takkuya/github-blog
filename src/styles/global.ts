@@ -11,7 +11,7 @@ export const GlobalStyle = styled.createGlobalStyle`
 
   :focus {
     outline: 0;
-    box-shadow: 0 0 0 2px ${(props) => props.theme.yellow};
+    box-shadow: 0 0 0 1px ${(props) => props.theme.blue};
   }
 
   html {
@@ -19,7 +19,7 @@ export const GlobalStyle = styled.createGlobalStyle`
   }
 
   body {
-    background: ${(props) => props.theme.background};
+    background: ${(props) => props.theme['base-background']};
     color: ${(props) => props.theme['base-text']};
     -webkit-font-smoothing: antialiased;
   }

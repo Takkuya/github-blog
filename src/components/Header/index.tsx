@@ -1,3 +1,12 @@
+import { BackgroundImg, HeaderContainer, Logo } from './styles'
+import logoImg from '../../assets/Logo.svg'
+import backgroundImg from '../../assets/Cover.png'
+
 export const Header = () => {
-  return <h1>Header maneiro e interessante</h1>
+  return (
+    <HeaderContainer>
+      <BackgroundImg src={backgroundImg} alt="" />
+      <Logo src={logoImg} alt="" />
+    </HeaderContainer>
+  )
 }
