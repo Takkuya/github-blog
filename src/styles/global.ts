@@ -34,7 +34,7 @@ export const GlobalStyle = styled.createGlobalStyle`
   }
 
   ${({ theme: { breakpoints } }) => css`
-    @media (min-width: ${breakpoints.md}) {
+    @media (min-width: ${breakpoints.lg}) {
       html {
         font-size: 100%;
       }

@@ -6,10 +6,32 @@ import {
   faComment,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Link } from 'react-router-dom'
+import { useContext, useEffect } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import { UserContext } from '../../../../components/contexts/UserContext'
 import { Item, PostCardContainer } from './styles'
 
 export const PostCard = () => {
+  const { repositories } = useContext(UserContext)
+  // se o valor for vazio retorna uma string vazia
+  const { id = '' } = useParams()
+  const navigate = useNavigate()
+
+  const repository = repositories[id]
+
+  useEffect(() => {
+    // se o valor não existe, if not repository basicamente
+    if (!repository) {
+      navigate('/')
+    }
+  })
+
+  if (!repository) {
+    return null
+  }
+
+  const { title, comments } = repository
+
   return (
     <PostCardContainer>
       <header>
@@ -20,7 +42,7 @@ export const PostCard = () => {
           VER NO GITHUB <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
         </a>
       </header>
-      <h2 id="title">JavaScript VS TypeScript. Differences</h2>
+      <h2 id="title">{title}</h2>
       <footer>
         <Item>
           <FontAwesomeIcon icon={faGithub} />
@@ -31,7 +53,8 @@ export const PostCard = () => {
           Há 1 dia
         </Item>
         <Item>
-          <FontAwesomeIcon icon={faComment} />7 comentários
+          <FontAwesomeIcon icon={faComment} />
+          {comments} comentários
         </Item>
       </footer>
     </PostCardContainer>

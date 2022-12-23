@@ -1,17 +1,46 @@
+/* eslint-disable camelcase */
 import { PublicationsContainer } from './styles'
+import { format, formatDistanceToNow } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
+import ReactMarkdown from 'react-markdown'
 
-export const PublicationsCard = () => {
+type PublicationsCardProps = {
+  repository: {
+    created_at: Date
+    title: string
+    body: string
+    id: number
+  }
+}
+
+export const PublicationsCard = ({ repository }: PublicationsCardProps) => {
+  const { title, created_at, body } = repository
+  const createDate = new Date(created_at)
+  const publishedDateFormatted = format(
+    createDate,
+    "d 'de' LLLL 'às' HH:mm'h'",
+    { locale: ptBR },
+  )
+
+  // tempo decorrido em relação ao presente
+  const publishedDateRelativeToNow = formatDistanceToNow(createDate, {
+    locale: ptBR,
+    addSuffix: true,
+  })
+
   return (
     <PublicationsContainer>
       <header>
-        <h2>JavaScript data types and data structures</h2>
-        <span>Há 1 dia</span>
+        <h2>{title}</h2>
+        <time
+          title={publishedDateFormatted}
+          dateTime={createDate.toISOString()}
+        >
+          {publishedDateRelativeToNow}
+        </time>
       </header>
       <span>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore rerum
-        veniam deserunt suscipit earum nihil! Asperiores quisquam tempore
-        dolorem, magnam placeat exercitationem recusandae atque id, ducimus ex
-        reiciendis laudantium quod.
+        <ReactMarkdown>{body}</ReactMarkdown>
       </span>
     </PublicationsContainer>
   )

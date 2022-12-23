@@ -3,6 +3,8 @@ import styled from 'styled-components'
 export const PublicationsContainer = styled.div`
   max-width: 26rem;
   padding: 2rem;
+  width: 100%;
+  height: 100%;
 
   background: ${(props) => props.theme['base-post']};
 
@@ -23,7 +25,7 @@ export const PublicationsContainer = styled.div`
 
   header {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
     gap: 1rem;
 
@@ -32,9 +34,9 @@ export const PublicationsContainer = styled.div`
       color: ${(props) => props.theme['base-title']};
     }
 
-    span {
+    time {
       white-space: nowrap;
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       color: ${(props) => props.theme['base-span']};
     }
   }

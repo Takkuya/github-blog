@@ -6,8 +6,13 @@ import {
   faUserGroup,
 } from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
+import { useContext } from 'react'
+import { UserContext } from '../../../../components/contexts/UserContext'
 
 export const UserCard = () => {
+  const { user } = useContext(UserContext)
+  const { name, followers, bio, login, company } = user
+
   return (
     <UserCardContainer>
       <ImageWrapper>
@@ -18,29 +23,27 @@ export const UserCard = () => {
       </ImageWrapper>
       <ContentWrapper>
         <header>
-          <h2>Gabriel Takuya Yamamoto</h2>
+          <h2>{name}</h2>
           <a href="https://github.com/Takkuya">
             GITHUB <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
           </a>
         </header>
-        <span className="content">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
-          vitae iste saepe incidunt labore accusamus expedita fugit sequi
-          delectus, aliquam quasi officiis nam minus quidem autem esse animi
-          facere facilis.
-        </span>
+        <span className="content">{bio}</span>
         <footer>
           <Item>
             <FontAwesomeIcon icon={faGithub} />
-            takkuya
+            {login}
           </Item>
-          <Item>
-            <FontAwesomeIcon icon={faBuilding} />
-            Euthymia Code
-          </Item>
+          {company !== null ? (
+            <Item>
+              <FontAwesomeIcon icon={faBuilding} />
+              {company}
+            </Item>
+          ) : null}
+
           <Item>
             <FontAwesomeIcon icon={faUserGroup} />
-            123 seguidores
+            {followers} seguidores
           </Item>
         </footer>
       </ContentWrapper>

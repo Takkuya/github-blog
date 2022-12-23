@@ -14,7 +14,7 @@ export const UserCardContainer = styled.div`
   box-shadow: 0px 2px 28px 1px rgba(0, 0, 0, 0.2);
 
   ${({ theme: { breakpoints } }) => css`
-    @media (min-width: ${breakpoints.md}) {
+    @media (min-width: ${breakpoints.lg}) {
       flex-direction: row;
     }
   `}
@@ -32,6 +32,7 @@ export const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  width: 100%;
 
   header {
     display: flex;

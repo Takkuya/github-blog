@@ -12,7 +12,7 @@ export const HomeContainer = styled.main`
   padding: 1.5rem;
 
   ${({ theme: { breakpoints } }) => css`
-    @media (min-width: ${breakpoints.md}) {
+    @media (min-width: ${breakpoints.lg}) {
       padding: 0;
     }
   `}
