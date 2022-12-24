@@ -6,32 +6,15 @@ import {
   faComment,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useContext, useEffect } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
-import { UserContext } from '../../../../components/contexts/UserContext'
+import { Link } from 'react-router-dom'
 import { Item, PostCardContainer } from './styles'
 
-export const PostCard = () => {
-  const { repositories } = useContext(UserContext)
-  // se o valor for vazio retorna uma string vazia
-  const { id = '' } = useParams()
-  const navigate = useNavigate()
+type PostCardProps = {
+  title: string
+  comments: number
+}
 
-  const repository = repositories[id]
-
-  useEffect(() => {
-    // se o valor não existe, if not repository basicamente
-    if (!repository) {
-      navigate('/')
-    }
-  })
-
-  if (!repository) {
-    return null
-  }
-
-  const { title, comments } = repository
-
+export const PostCard = ({ title, comments }: PostCardProps) => {
   return (
     <PostCardContainer>
       <header>

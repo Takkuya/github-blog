@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { PublicationsContainer } from './styles'
+import { Content, PublicationsContainer } from './styles'
 import { format, formatDistanceToNow } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
 import ReactMarkdown from 'react-markdown'
@@ -39,9 +39,9 @@ export const PublicationsCard = ({ repository }: PublicationsCardProps) => {
           {publishedDateRelativeToNow}
         </time>
       </header>
-      <span>
+      <Content>
         <ReactMarkdown>{body}</ReactMarkdown>
-      </span>
+      </Content>
     </PublicationsContainer>
   )
 }

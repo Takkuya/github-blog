@@ -19,6 +19,10 @@ export const PublicationsContainer = styled.div`
   border: 2px solid ${(props) => props.theme['base-post']};
   cursor: pointer;
 
+  line-height: 1.6;
+
+  max-height: 300px;
+
   &:hover {
     border: 2px solid ${(props) => props.theme['base-label']};
   }
@@ -40,4 +44,28 @@ export const PublicationsContainer = styled.div`
       color: ${(props) => props.theme['base-span']};
     }
   }
+
+  a {
+    display: inline-block;
+    text-decoration: underline;
+    color: ${(props) => props.theme.blue};
+  }
+`
+export const Content = styled.div`
+  p,
+  a,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  pre {
+    margin-top: 0.5rem;
+  }
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
 `
