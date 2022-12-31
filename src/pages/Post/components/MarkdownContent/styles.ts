@@ -20,6 +20,10 @@ export const MarkdownContentContainer = styled.div`
     margin-top: 1rem;
   }
 
+  p {
+    line-height: 1.6;
+  }
+
   pre {
     background: ${(props) => props.theme['base-post']};
     padding: 1rem;

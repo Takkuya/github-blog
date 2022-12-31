@@ -2,6 +2,10 @@ import styled, { css } from 'styled-components'
 
 export const PublicationsContainer = styled.div``
 
+type PublicationsGridWrapperProps = {
+  repositoriesSize: number
+}
+
 export const PublicationsGridWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -22,11 +26,14 @@ export const PublicationsGridWrapper = styled.div`
     justify-content: center;
   }
 
-  ${({ theme: { breakpoints } }) => css`
+  ${({ theme: { breakpoints } }) => css<PublicationsGridWrapperProps>`
     @media (min-width: ${breakpoints.md}) {
       display: grid;
       gap: 2rem;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: ${(props) =>
+        props.repositoriesSize !== 0 ? 'repeat(2, 1fr)' : 'repeat(1, 1fr)'};
+      text-align: ${(props) =>
+        props.repositoriesSize !== 0 ? 'left' : 'center'};
     }
   `}
 `

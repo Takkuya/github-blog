@@ -37,6 +37,7 @@ type FetchPublicationsResponse = {
 
 type UserContextType = {
   user: UserType
+  isLoading: boolean
   repositories: RepositoryType
   fetchPublications: (query: string) => Promise<void>
 }
@@ -45,6 +46,7 @@ export const UserContext = createContext({} as UserContextType)
 
 export const UserContextProvider = ({ children }: UserContextProviderProps) => {
   const [user, setUser] = useState<UserType>({} as UserType)
+  const [isLoading, setIsLoading] = useState(true)
   const [repositories, setRepositories] = useState<RepositoryType>(
     {} as RepositoryType,
   )
@@ -52,6 +54,7 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
   async function getUserInformation() {
     const response = await api.get('/users/Takkuya')
     setUser(response.data)
+    setIsLoading(false)
   }
 
   async function getRepositoryIssues() {
@@ -64,9 +67,8 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
       return { ...acc, [currentValue.id]: currentValue }
     }, {})
 
-    console.log('repsonseobj', responseObject)
-
     setRepositories(responseObject)
+    setIsLoading(false)
   }
 
   useEffect(() => {
@@ -79,18 +81,18 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
       `search/issues?q=${query}%20repo:Takkuya/github-blog`,
     )
 
-    console.log('response', response.data)
-
     const responseObject = response.data.items.reduce((acc, currentValue) => {
       return { ...acc, [currentValue.id]: currentValue }
     }, {})
 
-    console.log(responseObject)
     setRepositories(responseObject)
+    setIsLoading(false)
   }
 
   return (
-    <UserContext.Provider value={{ user, repositories, fetchPublications }}>
+    <UserContext.Provider
+      value={{ user, isLoading, repositories, fetchPublications }}
+    >
       {children}
     </UserContext.Provider>
   )

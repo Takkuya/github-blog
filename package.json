@@ -15,6 +15,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@hookform/resolvers": "^2.9.10",
     "@types/react-syntax-highlighter": "^15.5.5",
+    "@uiball/loaders": "^1.2.6",
     "axios": "^1.2.1",
     "date-fns": "^2.29.3",
     "react": "^18.2.0",

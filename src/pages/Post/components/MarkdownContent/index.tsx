@@ -16,7 +16,6 @@ export const MarkdownContent = ({ body }: MarkdownContentProps) => {
         components={{
           code({ node, inline, className, children, ...props }) {
             const match = /language-(\w+)/.exec(className || '')
-            console.log(node)
             return !inline && match ? (
               <SyntaxHighlighter
                 children={String(children).replace(/\n$/, '')}

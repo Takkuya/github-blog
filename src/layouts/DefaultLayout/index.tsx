@@ -1,12 +1,15 @@
+import { useContext } from 'react'
 import { Outlet } from 'react-router-dom'
+import { UserContext } from '../../components/contexts/UserContext'
 import { Header } from '../../components/Header'
-import { DefaultLayoutContainer } from './styles'
 
 export const DefaultLayout = () => {
+  const { isLoading } = useContext(UserContext)
+
   return (
-    <DefaultLayoutContainer>
-      <Header />
+    <>
+      {!isLoading ? <Header /> : null}
       <Outlet />
-    </DefaultLayoutContainer>
+    </>
   )
 }

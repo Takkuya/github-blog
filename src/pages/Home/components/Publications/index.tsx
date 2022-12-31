@@ -9,18 +9,24 @@ export const Publications = () => {
   const { repositories } = useContext(UserContext)
   const repositoriesArr = Object.values(repositories)
 
+  const repositoriesQuantity = repositoriesArr.length
+
   return (
     <PublicationsContainer>
       <SearchPublicationsForm />
 
-      <PublicationsGridWrapper>
-        {repositoriesArr.map((repository) => {
-          return (
-            <Link to={`/post/${repository.id}`} key={repository.id}>
-              <PublicationsCard repository={repository} />
-            </Link>
-          )
-        })}
+      <PublicationsGridWrapper repositoriesSize={repositoriesQuantity}>
+        {repositoriesArr.length !== 0 ? (
+          repositoriesArr.map((repository) => {
+            return (
+              <Link to={`/post/${repository.id}`} key={repository.id}>
+                <PublicationsCard repository={repository} />
+              </Link>
+            )
+          })
+        ) : (
+          <h4>Nenhum repositório encontrado</h4>
+        )}
       </PublicationsGridWrapper>
     </PublicationsContainer>
   )
