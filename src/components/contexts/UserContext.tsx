@@ -31,9 +31,14 @@ type Repository = {
   comments: number
 }
 
+type FetchPublicationsResponse = {
+  items: Repository[]
+}
+
 type UserContextType = {
   user: UserType
   repositories: RepositoryType
+  fetchPublications: (query: string) => Promise<void>
 }
 
 export const UserContext = createContext({} as UserContextType)
@@ -59,6 +64,8 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
       return { ...acc, [currentValue.id]: currentValue }
     }, {})
 
+    console.log('repsonseobj', responseObject)
+
     setRepositories(responseObject)
   }
 
@@ -67,8 +74,23 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
     getRepositoryIssues()
   }, [])
 
+  async function fetchPublications(query: string) {
+    const response = await api.get<FetchPublicationsResponse>(
+      `search/issues?q=${query}%20repo:Takkuya/github-blog`,
+    )
+
+    console.log('response', response.data)
+
+    const responseObject = response.data.items.reduce((acc, currentValue) => {
+      return { ...acc, [currentValue.id]: currentValue }
+    }, {})
+
+    console.log(responseObject)
+    setRepositories(responseObject)
+  }
+
   return (
-    <UserContext.Provider value={{ user, repositories }}>
+    <UserContext.Provider value={{ user, repositories, fetchPublications }}>
       {children}
     </UserContext.Provider>
   )

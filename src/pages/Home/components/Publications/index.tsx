@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { UserContext } from '../../../../components/contexts/UserContext'
 import { PublicationsCard } from '../../../../components/PublicationsCard'
-import { PublicationsForm } from '../PublicationsForm'
+import { SearchPublicationsForm } from '../SearchPublicationsForm'
 import { PublicationsContainer, PublicationsGridWrapper } from './styles'
 
 export const Publications = () => {
@@ -11,7 +11,7 @@ export const Publications = () => {
 
   return (
     <PublicationsContainer>
-      <PublicationsForm />
+      <SearchPublicationsForm />
 
       <PublicationsGridWrapper>
         {repositoriesArr.map((repository) => {

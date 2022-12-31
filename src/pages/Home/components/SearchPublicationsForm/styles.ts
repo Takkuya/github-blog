@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const PublicationsFormContainer = styled.div`
+export const SearchPublicationsFormContainer = styled.div`
   margin-top: 4.5rem;
 
   header {
