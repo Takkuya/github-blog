@@ -81,6 +81,8 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
       `search/issues?q=${query}%20repo:Takkuya/github-blog`,
     )
 
+    console.log('query', query)
+
     const responseObject = response.data.items.reduce((acc, currentValue) => {
       return { ...acc, [currentValue.id]: currentValue }
     }, {})

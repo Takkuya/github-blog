@@ -3,8 +3,9 @@ import * as zod from 'zod'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useContext } from 'react'
+import { ChangeEvent, useCallback, useContext } from 'react'
 import { UserContext } from '../../../../components/contexts/UserContext'
+import { debounce } from 'lodash'
 
 const searchPublicationsFormSchema = zod.object({
   query: z.string(),
@@ -14,16 +15,18 @@ type SearchPublicationsInputs = zod.infer<typeof searchPublicationsFormSchema>
 
 export const SearchPublicationsForm = () => {
   const { repositories, fetchPublications } = useContext(UserContext)
-  const { register, watch } = useForm<SearchPublicationsInputs>({
+  const { register } = useForm<SearchPublicationsInputs>({
     resolver: zodResolver(searchPublicationsFormSchema),
   })
-  const query = watch('query')
   const publicationsQuantity = Object.keys(repositories).length
 
-  async function handleSearchPublications(event: any) {
-    if (event.key === 'Enter') {
-      fetchPublications(query)
-    }
+  const debounceSearch = useCallback(
+    debounce((query) => fetchPublications(query), 500),
+    [],
+  )
+
+  function handleSearch(event: ChangeEvent<HTMLInputElement>) {
+    debounceSearch(event.target.value)
   }
 
   return (
@@ -34,8 +37,8 @@ export const SearchPublicationsForm = () => {
       <SearchInput
         type="text"
         placeholder="Buscar conteúdo"
-        onKeyDown={handleSearchPublications}
         {...register('query')}
+        onChange={handleSearch}
       />
     </SearchPublicationsFormContainer>
   )
